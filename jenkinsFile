@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     enviroment {
-        NONE_VERSIONS = '22.x'
+        NONE_VERSIONS = '18.x'
     }
 
     tools {
