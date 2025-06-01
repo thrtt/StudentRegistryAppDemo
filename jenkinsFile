@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+
+    enviroment {
+        NONE_VERSIONS = '22.x'
+    }
+
+    tools {
+        nodejs ${NONE_VERSIONS}
+    }
+
+    stages {
+        stage ('Checkout') {
+            steps{
+                checkout scm
+            }
+        }
+
+        stage ('Install dependencies') {
+            steps {
+                script {
+                    if (isUnix ()) {
+                        sh 'npm install'
+                    }
+                    else {
+                        sh 'npm install'
+                    }
+                }
+            }
+        }
+
+        stage ('Start aplication and run tests'){
+            steps {
+                script {
+                    sh 'npm start &'
+                    sh 'wait-on http://localhost:8090'
+                    sh 'npm test'
+                }
+            }
+        }
+    }
+
+    post {
+        aways {
+            echo 'CI pipeline completed'
+        }
+    }
+}
