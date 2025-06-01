@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [18.x]
@@ -24,5 +23,6 @@ jobs:
     - run: npm ci
     - run: npm start &
     - run: sleep 5
-    - run: chmod +x node_modules/.bin/mocha
-    - run: npx mocha tests/*.js
+    - run: ls -l node_modules/.bin/mocha
+    - run: head -20 node_modules/.bin/mocha
+    - run: node ./node_modules/mocha/bin/mocha.js tests/*.js
