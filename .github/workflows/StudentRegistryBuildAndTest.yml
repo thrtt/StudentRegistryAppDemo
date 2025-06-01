@@ -22,8 +22,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm install
-    - run: chmod +x ./node_modules/.bin/mocha
+    - run: npm ci
     - run: npm start &
     - run: sleep 5
-    - run: ./node_modules/.bin/mocha tests/*.js
+    - run: npx mocha tests/*.js
