@@ -1,43 +1,38 @@
 pipeline {
     agent any
 
-    enviroment {
-        NONE_VERSIONS = '18.x'
+    environment {
+        NODE_VERSION = '18.x'
     }
 
     tools {
-        nodejs ${NONE_VERSIONS}
+        nodejs 'nodejs18'  // това трябва да е името на NodeJS tool-а в Jenkins
     }
 
     stages {
-        stage ('Checkout') {
-            steps{
-                git branch: 'main', url: 'https://github.com/thrtt/StudentRegistryAppDemo'             }
-        }
-
-        stage ('Install dependencies') {
+        stage('Checkout') {
             steps {
-                script {
-                    
-                        bat 'npm install'
-                    }
-                }
+                git branch: 'main', url: 'https://github.com/thrtt/StudentRegistryAppDemo.git'
             }
         }
 
-        stage ('Start aplication and run tests'){
+        stage('Install dependencies') {
             steps {
-                script {
-                    bat 'npm start &'
-                    bat 'wait-on http://localhost:8090'
-                    bat 'npm test'
-                }
+                bat 'npm install'
+            }
+        }
+
+        stage('Start application and run tests') {
+            steps {
+                bat 'start /b npm start'  // стартира app на заден фон в Windows
+                bat 'wait-on http://localhost:8090' // изисква wait-on да е инсталиран глобално
+                bat 'npm test'
             }
         }
     }
 
     post {
-        aways {
+        always {
             echo 'CI pipeline completed'
         }
     }
