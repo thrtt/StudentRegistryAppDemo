@@ -1,7 +1,6 @@
 pipeline {
     agent any
 
-
     tools {
         nodejs 'nodejs18'  
     }
@@ -21,8 +20,8 @@ pipeline {
 
         stage('Start application and run tests') {
             steps {
-                bat 'start /b npm start'  
-                bat 'wait-on http://localhost:8090' 
+                bat 'start /b npm start'
+                bat 'npx wait-on http://localhost:8090'
                 bat 'npm test'
             }
         }

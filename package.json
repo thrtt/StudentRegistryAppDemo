@@ -11,5 +11,8 @@
   "scripts": {
     "test": "mocha tests/*.js",
     "start": "node index.js"
+  },
+  "devDependencies": {
+    "wait-on": "^8.0.3"
   }
 }
