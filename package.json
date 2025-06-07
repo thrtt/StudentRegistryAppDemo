@@ -10,7 +10,7 @@
   },
   "scripts": {
     "test": "mocha tests/*.js",
-    "start": "node index.js"
+    "start": "node index.js 8090"
   },
   "devDependencies": {
     "wait-on": "^8.0.3"
