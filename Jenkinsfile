@@ -1,12 +1,9 @@
 pipeline {
     agent any
 
-    environment {
-        NODE_VERSION = '18.x'
-    }
 
     tools {
-        nodejs 'nodejs18'  // това трябва да е името на NodeJS tool-а в Jenkins
+        nodejs 'nodejs18'  
     }
 
     stages {
@@ -24,8 +21,8 @@ pipeline {
 
         stage('Start application and run tests') {
             steps {
-                bat 'start /b npm start'  // стартира app на заден фон в Windows
-                bat 'wait-on http://localhost:8090' // изисква wait-on да е инсталиран глобално
+                bat 'start /b npm start'  
+                bat 'wait-on http://localhost:8090' 
                 bat 'npm test'
             }
         }
