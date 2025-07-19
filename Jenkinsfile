@@ -21,7 +21,7 @@ pipeline {
         stage('Start application and run tests') {
             steps {
                 bat 'start /b npm start'
-                bat 'npx wait-on http://localhost:8081'
+                bat 'npx wait-on http://localhost:8090'
                 bat 'npm test'
             }
         }
